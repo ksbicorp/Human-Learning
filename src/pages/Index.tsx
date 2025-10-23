@@ -44,10 +44,10 @@ const Index = () => {
           <h1 className="text-6xl md:text-7xl font-black mb-8 leading-[1.1] animate-fade-in-up opacity-0 animation-delay-100">
             Discover Your{" "}
             <span className="relative inline-block">
-              <span className="gradient-text animate-pulse-glow">
+              <span className="gradient-text animate-pulse-glow relative z-10">
                 Unique Learning
               </span>
-              <div className="absolute -inset-1 bg-gradient-to-r from-primary to-secondary blur-2xl opacity-30 -z-10" />
+              <div className="absolute -inset-2 bg-gradient-to-r from-primary to-secondary blur-3xl opacity-20 -z-0" />
             </span>
             {" "}Profile
           </h1>
