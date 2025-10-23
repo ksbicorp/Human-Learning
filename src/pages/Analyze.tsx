@@ -52,50 +52,55 @@ Please adapt your responses to match this learning profile. Provide detailed tec
       <Navigation />
       <div className="container mx-auto px-6 py-24">
         <div className="max-w-4xl mx-auto">
-          <div className="mb-8">
-            <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
+          <div className="mb-10">
+            <h1 className="text-5xl font-black mb-4 gradient-text">
               Your Learning Profile
             </h1>
-            <p className="text-muted-foreground">
+            <p className="text-xl text-muted-foreground">
               AI-generated insights based on your conversation patterns
             </p>
           </div>
 
-          <div className="grid gap-6 mb-6">
-            <Card className="glass-card">
+          <div className="grid gap-8 mb-8">
+            <Card className="glass-card border-2 border-primary/30 glow-primary">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Brain className="w-5 h-5 text-primary" />
+                <CardTitle className="flex items-center gap-3 text-2xl">
+                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                    <Brain className="w-6 h-6 text-white" />
+                  </div>
                   Profile Overview
                 </CardTitle>
-                <CardDescription>
+                <CardDescription className="text-base">
                   How you naturally communicate and learn
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid md:grid-cols-3 gap-4">
-                  <div className="p-4 rounded-lg bg-primary/10 border border-primary/20">
-                    <p className="text-sm text-muted-foreground mb-1">Style</p>
-                    <p className="font-semibold">{mockProfile.style}</p>
+              <CardContent className="space-y-8">
+                <div className="grid md:grid-cols-3 gap-6">
+                  <div className="p-6 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/10 border-2 border-primary/30 hover:scale-105 transition-smooth backdrop-blur-xl">
+                    <p className="text-sm text-muted-foreground mb-2 uppercase tracking-wider">Style</p>
+                    <p className="font-bold text-lg">{mockProfile.style}</p>
                   </div>
-                  <div className="p-4 rounded-lg bg-info/10 border border-info/20">
-                    <p className="text-sm text-muted-foreground mb-1">Complexity</p>
-                    <p className="font-semibold">{mockProfile.complexity}</p>
+                  <div className="p-6 rounded-2xl bg-gradient-to-br from-info/20 to-info/10 border-2 border-info/30 hover:scale-105 transition-smooth backdrop-blur-xl">
+                    <p className="text-sm text-muted-foreground mb-2 uppercase tracking-wider">Complexity</p>
+                    <p className="font-bold text-lg">{mockProfile.complexity}</p>
                   </div>
-                  <div className="p-4 rounded-lg bg-success/10 border border-success/20">
-                    <p className="text-sm text-muted-foreground mb-1">Format</p>
-                    <p className="font-semibold">{mockProfile.preferredFormat}</p>
+                  <div className="p-6 rounded-2xl bg-gradient-to-br from-success/20 to-success/10 border-2 border-success/30 hover:scale-105 transition-smooth backdrop-blur-xl">
+                    <p className="text-sm text-muted-foreground mb-2 uppercase tracking-wider">Format</p>
+                    <p className="font-bold text-lg">{mockProfile.preferredFormat}</p>
                   </div>
                 </div>
 
                 <div>
-                  <h3 className="font-semibold mb-3 flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-primary" />
+                  <h3 className="font-bold text-xl mb-4 flex items-center gap-2">
+                    <Sparkles className="w-5 h-5 text-primary" />
                     Key Learning Traits
                   </h3>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-3">
                     {mockProfile.keyTraits.map((trait, index) => (
-                      <Badge key={index} variant="secondary" className="px-3 py-1">
+                      <Badge 
+                        key={index} 
+                        className="px-4 py-2 text-sm font-semibold rounded-xl bg-gradient-to-r from-secondary/20 to-accent/20 border-2 border-secondary/30 hover:scale-110 transition-smooth backdrop-blur-xl"
+                      >
                         {trait}
                       </Badge>
                     ))}
@@ -104,40 +109,39 @@ Please adapt your responses to match this learning profile. Provide detailed tec
               </CardContent>
             </Card>
 
-            <Card className="glass-card">
+            <Card className="glass-card border-2 border-accent/30 glow-accent">
               <CardHeader>
-                <CardTitle>Personalized Prompt</CardTitle>
-                <CardDescription>
+                <CardTitle className="text-2xl">Personalized Prompt</CardTitle>
+                <CardDescription className="text-base">
                   Use this as a system prompt when chatting with AI models
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="relative">
-                  <pre className="bg-muted/50 p-4 rounded-lg overflow-x-auto text-sm border border-border">
+              <CardContent className="space-y-6">
+                <div className="relative group">
+                  <pre className="bg-muted/30 p-6 rounded-2xl overflow-x-auto text-sm border-2 border-accent/30 backdrop-blur-xl leading-relaxed">
                     {mockPrompt}
                   </pre>
                   <Button
                     onClick={copyToClipboard}
-                    size="sm"
-                    className="absolute top-2 right-2 bg-primary/20 hover:bg-primary/30"
+                    className="absolute top-4 right-4 bg-gradient-to-r from-accent to-info hover:from-accent/90 hover:to-info/90 text-white glow-accent rounded-xl"
                   >
                     {copied ? (
                       <>
                         <Check className="w-4 h-4 mr-2" />
-                        Copied
+                        Copied!
                       </>
                     ) : (
                       <>
                         <Copy className="w-4 h-4 mr-2" />
-                        Copy
+                        Copy Prompt
                       </>
                     )}
                   </Button>
                 </div>
 
-                <div className="p-4 rounded-lg bg-info/10 border border-info/20">
-                  <p className="text-sm">
-                    <strong>How to use:</strong> Copy this prompt and paste it as a "system message" or 
+                <div className="p-6 rounded-2xl bg-gradient-to-br from-info/20 to-info/10 border-2 border-info/30 backdrop-blur-xl">
+                  <p className="text-sm leading-relaxed">
+                    <strong className="text-base">How to use:</strong> Copy this prompt and paste it as a "system message" or 
                     "custom instruction" in your AI chat interface. This will help the AI tailor its 
                     responses to your unique learning style.
                   </p>

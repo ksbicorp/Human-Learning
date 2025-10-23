@@ -48,24 +48,25 @@ const Upload = () => {
       <Navigation />
       <div className="container mx-auto px-6 py-24">
         <div className="max-w-2xl mx-auto">
-          <div className="mb-8">
-            <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
+          <div className="mb-10">
+            <h1 className="text-5xl font-black mb-4 gradient-text">
               Upload Chat Data
             </h1>
-            <p className="text-muted-foreground">
+            <p className="text-xl text-muted-foreground">
               Upload your exported chat conversations from AI platforms (ChatGPT, Claude, etc.)
             </p>
           </div>
 
-          <Card className="glass-card">
+          <Card className="glass-card border-2 border-primary/30">
             <CardHeader>
-              <CardTitle>Select Chat Export</CardTitle>
-              <CardDescription>
+              <CardTitle className="text-2xl">Select Chat Export</CardTitle>
+              <CardDescription className="text-base">
                 Supported formats: JSON, TXT
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="border-2 border-dashed border-border rounded-lg p-12 text-center hover:border-primary transition-smooth cursor-pointer">
+            <CardContent className="space-y-8">
+              <div className="relative border-2 border-dashed border-primary/40 rounded-2xl p-16 text-center hover:border-primary hover:bg-primary/5 transition-smooth cursor-pointer group backdrop-blur-xl">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-smooth" />
                 <input
                   type="file"
                   accept=".json,.txt"
@@ -73,26 +74,26 @@ const Upload = () => {
                   className="hidden"
                   id="file-upload"
                 />
-                <label htmlFor="file-upload" className="cursor-pointer">
+                <label htmlFor="file-upload" className="cursor-pointer relative z-10">
                   {file ? (
-                    <div className="flex flex-col items-center gap-3">
-                      <div className="w-16 h-16 rounded-full bg-success/20 flex items-center justify-center">
-                        <Check className="w-8 h-8 text-success" />
+                    <div className="flex flex-col items-center gap-4">
+                      <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-success to-success/70 flex items-center justify-center glow-accent shadow-2xl">
+                        <Check className="w-10 h-10 text-white" />
                       </div>
                       <div>
-                        <p className="font-medium">{file.name}</p>
+                        <p className="font-bold text-lg mb-1">{file.name}</p>
                         <p className="text-sm text-muted-foreground">
                           {(file.size / 1024).toFixed(2)} KB
                         </p>
                       </div>
                     </div>
                   ) : (
-                    <div className="flex flex-col items-center gap-3">
-                      <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center glow">
-                        <UploadIcon className="w-8 h-8 text-primary" />
+                    <div className="flex flex-col items-center gap-4">
+                      <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center glow-primary group-hover:scale-110 transition-smooth shadow-2xl">
+                        <UploadIcon className="w-10 h-10 text-white" />
                       </div>
                       <div>
-                        <p className="font-medium">Click to upload or drag and drop</p>
+                        <p className="font-bold text-lg mb-2">Click to upload or drag and drop</p>
                         <p className="text-sm text-muted-foreground">
                           JSON or TXT files only
                         </p>
@@ -106,7 +107,7 @@ const Upload = () => {
                 <Button
                   onClick={handleUpload}
                   disabled={uploading}
-                  className="w-full bg-primary hover:bg-primary/90 glow"
+                  className="w-full bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white glow-primary rounded-2xl py-7 text-lg font-bold"
                   size="lg"
                 >
                   {uploading ? "Processing..." : "Analyze Chat Data"}
