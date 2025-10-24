@@ -1,8 +1,5 @@
-import { Link } from "react-router-dom";
-import { Brain, Upload, BarChart3, Sparkles, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Brain, Upload, BarChart3, Sparkles } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import Navigation from "@/components/Navigation";
 
 const Index = () => {
   const features = [
@@ -29,8 +26,7 @@ const Index = () => {
   ];
 
   return (
-    <>
-      <Navigation />
+    <div className="min-h-screen">
       <div className="container mx-auto px-6 py-24">
         {/* Hero Section */}
         <div className="max-w-4xl mx-auto text-center mb-16">
@@ -50,36 +46,8 @@ const Index = () => {
           </h1>
           
           <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed animate-fade-in-up opacity-0 animation-delay-200">
-            Just like AI models are trained with specific formats like ChatML, humans have unique 
-            ways of understanding information. Human Learning analyzes your AI conversations to 
-            create personalized communication profiles.
+            Analyze your AI conversations to understand your unique learning patterns and communication style.
           </p>
-
-          <div className="flex flex-wrap gap-5 justify-center animate-fade-in-up opacity-0 animation-delay-300">
-            <Link to="/upload">
-              <Button 
-                size="lg" 
-                className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 text-lg rounded-sm group"
-              >
-                <span className="flex items-center gap-2 font-bold tracking-wide">
-                  GET STARTED
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-smooth" />
-                </span>
-              </Button>
-            </Link>
-            <Link to="/analyze">
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="border-2 border-border hover:bg-muted px-8 py-6 text-lg rounded-sm group"
-              >
-                <span className="flex items-center gap-2 font-bold tracking-wide">
-                  VIEW DEMO
-                  <Sparkles className="w-4 h-4 group-hover:scale-110 transition-smooth" />
-                </span>
-              </Button>
-            </Link>
-          </div>
         </div>
 
         {/* Features Grid */}
@@ -138,7 +106,7 @@ const Index = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
