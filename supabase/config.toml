@@ -1,1 +1,4 @@
 project_id = "ueklbcwnwpuhfcexjgyy"
+
+[functions.analyze-chat]
+verify_jwt = true
