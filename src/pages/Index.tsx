@@ -34,20 +34,17 @@ const Index = () => {
       <div className="container mx-auto px-6 py-24">
         {/* Hero Section */}
         <div className="max-w-4xl mx-auto text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-primary/20 to-secondary/20 border border-primary/30 mb-8 glow-primary backdrop-blur-xl animate-fade-in-down opacity-0">
-            <Sparkles className="w-4 h-4 text-primary animate-pulse" />
-            <span className="text-sm font-semibold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              AI-Powered Learning Analysis
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-sm bg-card border border-border mb-8 animate-fade-in-down opacity-0">
+            <Sparkles className="w-4 h-4" />
+            <span className="text-sm font-semibold tracking-wide">
+              AI-POWERED LEARNING ANALYSIS
             </span>
           </div>
           
-          <h1 className="text-6xl md:text-7xl font-black mb-8 leading-[1.1] animate-fade-in-up opacity-0 animation-delay-100">
+          <h1 className="text-6xl md:text-7xl font-black mb-8 leading-[1.1] animate-fade-in-up opacity-0 animation-delay-100 tracking-tighter">
             Discover Your{" "}
-            <span className="relative inline-block">
-              <span className="gradient-text relative z-10">
-                Unique Learning
-              </span>
-              <div className="absolute -inset-2 bg-gradient-to-r from-primary to-secondary blur-3xl opacity-20 -z-0" />
+            <span className="relative inline-block border-b-4 border-primary">
+              Unique Learning
             </span>
             {" "}Profile
           </h1>
@@ -62,11 +59,10 @@ const Index = () => {
             <Link to="/upload">
               <Button 
                 size="lg" 
-                className="relative bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white px-8 py-6 text-lg rounded-2xl glow-primary group overflow-hidden"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 text-lg rounded-sm group"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/50 to-secondary/50 blur-xl opacity-0 group-hover:opacity-100 transition-smooth" />
-                <span className="relative z-10 flex items-center gap-2">
-                  Get Started
+                <span className="flex items-center gap-2 font-bold tracking-wide">
+                  GET STARTED
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-smooth" />
                 </span>
               </Button>
@@ -75,11 +71,11 @@ const Index = () => {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-2 border-accent/40 hover:bg-accent/20 hover:border-accent/60 px-8 py-6 text-lg rounded-2xl backdrop-blur-xl group"
+                className="border-2 border-border hover:bg-muted px-8 py-6 text-lg rounded-sm group"
               >
-                <span className="flex items-center gap-2">
-                  View Demo
-                  <Sparkles className="w-4 h-4 text-accent group-hover:scale-110 transition-smooth" />
+                <span className="flex items-center gap-2 font-bold tracking-wide">
+                  VIEW DEMO
+                  <Sparkles className="w-4 h-4 group-hover:scale-110 transition-smooth" />
                 </span>
               </Button>
             </Link>
@@ -90,23 +86,16 @@ const Index = () => {
         <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto mb-20">
           {features.map((feature, index) => {
             const Icon = feature.icon;
-            const glowColors = [
-              'glow-primary',
-              'glow-secondary', 
-              'glow-accent',
-              'glow-primary'
-            ];
             return (
               <Card 
                 key={index} 
-                className={`glass-card hover:scale-105 transition-smooth group cursor-pointer relative overflow-hidden border border-primary/10 hover:border-primary/30 animate-scale-in opacity-0 animation-delay-${(index + 4) * 100}`}
+                className={`glass-card hover:border-primary transition-smooth group cursor-pointer relative overflow-hidden animate-scale-in opacity-0 animation-delay-${(index + 4) * 100}`}
               >
-                <div className={`absolute inset-0 ${glowColors[index]} opacity-0 group-hover:opacity-100 transition-smooth -z-10`} />
                 <CardHeader className="relative z-10">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/30 to-secondary/30 flex items-center justify-center mb-5 group-hover:scale-125 transition-smooth backdrop-blur-xl border border-primary/30">
-                    <Icon className="w-7 h-7 text-white" />
+                  <div className="w-14 h-14 rounded-sm bg-muted flex items-center justify-center mb-5 group-hover:bg-primary group-hover:text-primary-foreground transition-smooth border border-border">
+                    <Icon className="w-7 h-7" />
                   </div>
-                  <CardTitle className="text-xl mb-3">{feature.title}</CardTitle>
+                  <CardTitle className="text-xl mb-3 font-bold tracking-tight">{feature.title}</CardTitle>
                   <CardDescription className="text-base">{feature.description}</CardDescription>
                 </CardHeader>
               </Card>
@@ -116,37 +105,33 @@ const Index = () => {
 
         {/* How It Works */}
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 gradient-text animate-fade-in-up opacity-0">How It Works</h2>
+          <h2 className="text-4xl font-bold text-center mb-16 tracking-tighter animate-fade-in-up opacity-0">HOW IT WORKS</h2>
           <div className="grid md:grid-cols-3 gap-10">
             {[
               {
                 step: "1",
                 title: "Upload Your Data",
                 description: "Export and upload your chat conversations from any AI platform",
-                gradient: "from-primary to-secondary",
               },
               {
                 step: "2",
                 title: "AI Analysis",
                 description: "Our AI analyzes your communication patterns and learning style",
-                gradient: "from-secondary to-accent",
               },
               {
                 step: "3",
                 title: "Get Your Profile",
                 description: "Receive a personalized prompt to use with any AI assistant",
-                gradient: "from-accent to-primary",
               },
             ].map((item, index) => (
               <div key={item.step} className={`text-center group animate-fade-in-up opacity-0 animation-delay-${(index + 2) * 100}`}>
-                <div className={`relative w-20 h-20 rounded-3xl bg-gradient-to-br ${item.gradient} flex items-center justify-center mx-auto mb-6 text-3xl font-black text-white animate-glow-pulse group-hover:scale-125 transition-smooth`}>
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-3xl" />
+                <div className="relative w-20 h-20 rounded-sm bg-card border-2 border-border flex items-center justify-center mx-auto mb-6 text-3xl font-black group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-smooth">
                   <span className="relative z-10">{item.step}</span>
                 </div>
-                <h3 className="text-2xl font-bold mb-3">{item.title}</h3>
+                <h3 className="text-2xl font-bold mb-3 tracking-tight">{item.title}</h3>
                 <p className="text-muted-foreground text-lg leading-relaxed">{item.description}</p>
                 {index < 2 && (
-                  <div className="hidden md:block absolute top-10 right-0 w-8 h-0.5 bg-gradient-to-r from-primary/50 to-transparent transform translate-x-full" />
+                  <div className="hidden md:block absolute top-10 right-0 w-8 h-0.5 bg-border transform translate-x-full" />
                 )}
               </div>
             ))}
