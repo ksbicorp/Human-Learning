@@ -14,7 +14,69 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      chat_histories: {
+        Row: {
+          file_content: string
+          file_name: string
+          file_size: number
+          id: string
+          uploaded_at: string
+          user_id: string
+        }
+        Insert: {
+          file_content: string
+          file_name: string
+          file_size: number
+          id?: string
+          uploaded_at?: string
+          user_id: string
+        }
+        Update: {
+          file_content?: string
+          file_name?: string
+          file_size?: number
+          id?: string
+          uploaded_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_profiles: {
+        Row: {
+          analyzed_at: string
+          complexity_level: string
+          id: string
+          key_traits: string[]
+          learning_style: string
+          personalized_prompt: string
+          preferred_format: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          analyzed_at?: string
+          complexity_level: string
+          id?: string
+          key_traits: string[]
+          learning_style: string
+          personalized_prompt: string
+          preferred_format: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          analyzed_at?: string
+          complexity_level?: string
+          id?: string
+          key_traits?: string[]
+          learning_style?: string
+          personalized_prompt?: string
+          preferred_format?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
