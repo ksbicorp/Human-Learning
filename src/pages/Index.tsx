@@ -1,20 +1,24 @@
-import { useState, useEffect } from "react";
-import { Brain, Upload, BarChart3, Sparkles, Copy, Check, ArrowRight, LogOut } from "lucide-react";
+import { useState } from "react";
+import { Brain, Upload, BarChart3, Sparkles, Copy, Check, ArrowRight } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
-import { AuthDialog } from "@/components/AuthDialog";
+import { generativeModel } from "@/integrations/gemini/client";
+
+interface Profile {
+  learning_style: string;
+  complexity_level: string;
+  preferred_format: string;
+  key_traits: string[];
+}
 
 const Index = () => {
   const [file, setFile] = useState<File | null>(null);
   const [analyzing, setAnalyzing] = useState(false);
-  const [profile, setProfile] = useState<any>(null);
+  const [profile, setProfile] = useState<Profile | null>(null);
   const [prompt, setPrompt] = useState<string>("");
   const [copied, setCopied] = useState(false);
-  const [showAuth, setShowAuth] = useState(false);
-  const [user, setUser] = useState<any>(null);
   const { toast } = useToast();
 
   const features = [
@@ -40,58 +44,6 @@ const Index = () => {
     },
   ];
 
-  useEffect(() => {
-    // Check current auth state
-    supabase.auth.getUser().then(({ data: { user } }) => {
-      setUser(user);
-      if (user) {
-        // Load existing profile if available
-        loadProfile();
-      }
-    });
-
-    // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user || null);
-      if (session?.user) {
-        loadProfile();
-      } else {
-        setProfile(null);
-        setPrompt("");
-      }
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
-
-  const loadProfile = async () => {
-    const { data, error } = await supabase
-      .from('user_profiles')
-      .select('*')
-      .single();
-
-    if (data && !error) {
-      setProfile({
-        learning_style: data.learning_style,
-        complexity_level: data.complexity_level,
-        preferred_format: data.preferred_format,
-        key_traits: data.key_traits,
-      });
-      setPrompt(data.personalized_prompt);
-    }
-  };
-
-  const handleSignOut = async () => {
-    await supabase.auth.signOut();
-    setProfile(null);
-    setPrompt("");
-    setFile(null);
-    toast({
-      title: "Signed out",
-      description: "You've been signed out successfully",
-    });
-  };
-
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile) {
@@ -114,42 +66,25 @@ const Index = () => {
   const analyzeChat = async () => {
     if (!file) return;
 
-    // Check if user is logged in
-    if (!user) {
-      setShowAuth(true);
-      return;
-    }
-
     setAnalyzing(true);
     try {
       const content = await file.text();
+      const result = await generativeModel.generateContent(content);
+      const response = await result.response;
+      const text = await response.text();
 
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        throw new Error('No session found');
-      }
+      // NOTE: This assumes the Gemini API returns a JSON object with the expected structure.
+      //       If the API returns a different structure, this will need to be adjusted.
+      const { profile, personalized_prompt } = JSON.parse(text);
 
-      const { data, error } = await supabase.functions.invoke('analyze-chat', {
-        body: {
-          chatContent: content,
-          fileName: file.name,
-          fileSize: file.size,
-        },
-        headers: {
-          Authorization: `Bearer ${session.access_token}`,
-        },
-      });
-
-      if (error) throw error;
-
-      setProfile(data.profile);
-      setPrompt(data.personalized_prompt);
+      setProfile(profile);
+      setPrompt(personalized_prompt);
 
       toast({
         title: "Analysis complete!",
         description: "Your learning profile is ready",
       });
-    } catch (error: any) {
+    } catch (error) {
       console.error('Analysis error:', error);
       toast({
         title: "Analysis failed",
@@ -173,41 +108,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
-      <AuthDialog 
-        open={showAuth} 
-        onOpenChange={setShowAuth}
-        onSuccess={() => {
-          supabase.auth.getUser().then(({ data: { user } }) => {
-            setUser(user);
-          });
-        }}
-      />
-      
-      {/* Header */}
-      <div className="fixed top-6 right-6 z-50 flex items-center gap-4">
-        {user ? (
-          <>
-            <span className="text-sm text-muted-foreground">{user.email}</span>
-            <Button
-              onClick={handleSignOut}
-              variant="outline"
-              size="sm"
-              className="border-border hover:bg-muted rounded-sm"
-            >
-              <LogOut className="w-4 h-4 mr-2" />
-              SIGN OUT
-            </Button>
-          </>
-        ) : (
-          <Button
-            onClick={() => setShowAuth(true)}
-            className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-sm font-bold tracking-wide"
-          >
-            SIGN IN
-          </Button>
-        )}
-      </div>
-
       <div className="container mx-auto px-6 py-24">
         {/* Hero Section */}
         <div className="max-w-4xl mx-auto text-center mb-16">
