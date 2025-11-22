@@ -1,73 +1,272 @@
-# Welcome to your Lovable project
+# Human Learning - AI-Powered Learning Profile Analysis
 
-## Project info
+![Human Learning](https://img.shields.io/badge/AI-Gemini%203.0%20Pro-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+![React](https://img.shields.io/badge/React-18.3.1-61dafb)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.8.3-3178c6)
 
-**URL**: https://lovable.dev/projects/4239ed45-3896-4390-be79-2c4190e20acd
+## 🧠 Overview
 
-## How can I edit this code?
+**Human Learning** is an advanced AI-powered application that analyzes your chat conversations to discover your unique learning patterns and communication style. Using Google's cutting-edge **Gemini 3.0 Pro** model with advanced reasoning capabilities, it generates personalized AI prompts optimized for how you learn best.
 
-There are several ways of editing your application.
+### Key Features
 
-**Use Lovable**
+- 🤖 **Advanced AI Analysis** - Powered by Gemini 3.0 Pro with state-of-the-art reasoning
+- 📊 **Learning Profile Discovery** - Understand your unique communication patterns
+- ✨ **Personalized Prompts** - Get custom AI prompts optimized for your learning style
+- 📁 **Multi-Platform Support** - Import conversations from ChatGPT, Claude, and other AI platforms
+- 🎨 **Modern UI** - Beautiful, responsive interface built with React and Tailwind CSS
+- 🔒 **Privacy-Focused** - All analysis happens through secure API calls
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/4239ed45-3896-4390-be79-2c4190e20acd) and start prompting.
+## 🚀 Quick Start
 
-Changes made via Lovable will be committed automatically to this repo.
+### Prerequisites
 
-**Use your preferred IDE**
+- Node.js 18+ and npm
+- A Google Gemini API key ([Get one here](https://ai.google.dev/))
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Installation
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+```bash
+# Clone the repository
+git clone https://github.com/ksbicorp/Human-Learning.git
 
-Follow these steps:
+# Navigate to the project directory
+cd Human-Learning
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# Install dependencies
+npm install
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Create environment file
+cp .env.example .env
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+# Add your Gemini API key to .env
+# VITE_GEMINI_API_KEY=your_api_key_here
 ```
 
-**Edit a file directly in GitHub**
+### Running the Application
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```bash
+# Start the development server
+npm run dev
 
-**Use GitHub Codespaces**
+# Build for production
+npm run build
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+# Preview production build
+npm run preview
+```
 
-## What technologies are used for this project?
+The application will be available at `http://localhost:8080`
 
-This project is built with:
+## 🔧 Gemini 3.0 Integration
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+This application uses **Gemini 3.0 Pro Preview** (`gemini-3-pro-preview`), Google's most intelligent model family built on state-of-the-art reasoning capabilities.
 
-## How can I deploy this project?
+### Gemini 3.0 Features Used
 
-Simply open [Lovable](https://lovable.dev/projects/4239ed45-3896-4390-be79-2c4190e20acd) and click on Share -> Publish.
+- **Dynamic Thinking**: High-level reasoning for deep pattern analysis
+- **Advanced Context Understanding**: 1M token input, 64k token output
+- **Multimodal Capabilities**: Support for text, images, and documents
+- **Optimal Temperature**: Default 1.0 for best reasoning performance
 
-## Can I connect a custom domain to my Lovable project?
+### API Configuration
 
-Yes, you can!
+The Gemini client is configured in `src/integrations/gemini/client.ts`:
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+```typescript
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
+
+export const generativeModel = genAI.getGenerativeModel({ 
+  model: "gemini-3-pro-preview",
+  generationConfig: {
+    temperature: 1.0, // Recommended default for Gemini 3
+  }
+});
+```
+
+### Code Examples
+
+#### JavaScript/TypeScript (Current Implementation)
+
+```javascript
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+const ai = new GoogleGenerativeAI({ apiKey: process.env.GEMINI_API_KEY });
+
+async function analyzeChat() {
+  const response = await ai.models.generateContent({
+    model: "gemini-3-pro-preview",
+    contents: "Analyze this chat conversation and identify learning patterns...",
+  });
+
+  console.log(response.text);
+}
+```
+
+#### Python Alternative
+
+```python
+from google import genai
+
+client = genai.Client(api_key="YOUR_API_KEY")
+
+response = client.models.generate_content(
+    model="gemini-3-pro-preview",
+    contents="Analyze this chat conversation and identify learning patterns...",
+)
+
+print(response.text)
+```
+
+#### REST API
+
+```bash
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-pro-preview:generateContent" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -X POST \
+  -d '{
+    "contents": [{
+      "parts": [{"text": "Analyze this chat conversation..."}]
+    }]
+  }'
+```
+
+## 📖 Usage Guide
+
+### 1. Export Your Chat History
+
+Export conversations from your preferred AI platform:
+- **ChatGPT**: Settings → Data Controls → Export Data
+- **Claude**: Export conversation as JSON or TXT
+- **Other platforms**: Save as JSON or TXT format
+
+### 2. Upload and Analyze
+
+1. Click on the upload area or drag and drop your file
+2. Supported formats: `.json`, `.txt`
+3. Click "ANALYZE CHAT DATA"
+4. Wait for the AI analysis to complete
+
+### 3. View Your Profile
+
+Your learning profile includes:
+- **Learning Style**: How you prefer to process information
+- **Complexity Level**: Your comfort with complex concepts
+- **Preferred Format**: How you like information structured
+- **Key Traits**: Specific patterns in your communication
+
+### 4. Use Your Personalized Prompt
+
+Copy the generated prompt and use it as a system prompt in any AI chat application for optimized interactions.
+
+## 🏗️ Project Structure
+
+```
+Human-Learning/
+├── src/
+│   ├── components/        # Reusable UI components
+│   ├── pages/            # Page components
+│   │   └── Index.tsx     # Main application page
+│   ├── integrations/     # External service integrations
+│   │   └── gemini/       # Gemini API client
+│   ├── hooks/            # Custom React hooks
+│   └── lib/              # Utility functions
+├── public/               # Static assets
+├── electron/             # Electron desktop app (optional)
+└── package.json          # Project dependencies
+```
+
+## 🛠️ Technology Stack
+
+- **Frontend**: React 18.3.1, TypeScript 5.8.3
+- **UI Framework**: Tailwind CSS, shadcn/ui
+- **AI Model**: Google Gemini 3.0 Pro
+- **Build Tool**: Vite 5.4.19
+- **State Management**: React Query (TanStack Query)
+- **Routing**: React Router DOM
+- **Desktop App**: Electron (optional)
+
+## 🔐 Environment Variables
+
+Create a `.env` file in the root directory:
+
+```env
+VITE_GEMINI_API_KEY=your_gemini_api_key_here
+```
+
+## 📦 Building for Production
+
+```bash
+# Build web application
+npm run build
+
+# Build desktop application (Electron)
+npm run electron:build
+```
+
+## 🧪 Development
+
+```bash
+# Run linter
+npm run lint
+
+# Start development server
+npm run dev
+
+# Run Electron in development
+npm run electron:dev
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🙏 Acknowledgments
+
+- Powered by [Google Gemini 3.0 Pro](https://ai.google.dev/gemini-api/docs/models/gemini)
+- UI components from [shadcn/ui](https://ui.shadcn.com/)
+- Built with [React](https://react.dev/) and [Vite](https://vitejs.dev/)
+
+## 📞 Support
+
+For questions or issues, please open an issue on GitHub.
+
+---
+
+**Note**: This application requires a valid Google Gemini API key. The Gemini 3.0 Pro model is currently in preview and pricing may apply. Check the [official documentation](https://ai.google.dev/gemini-api/docs/models/gemini) for current pricing and rate limits.
+
+## 🌟 Gemini 3.0 Pro Capabilities
+
+### Model Specifications
+
+| Feature | Specification |
+|---------|--------------|
+| Model ID | `gemini-3-pro-preview` |
+| Context Window | 1M tokens (input) / 64k tokens (output) |
+| Knowledge Cutoff | January 2025 |
+| Pricing | $2-$4 / $12-$18 per 1M tokens (varies by usage) |
+
+### Advanced Features
+
+- **Dynamic Thinking**: Adjustable reasoning depth (low/high)
+- **Media Resolution Control**: Optimized image and video processing
+- **Structured Outputs**: JSON schema validation
+- **Function Calling**: Tool integration support
+- **Context Caching**: Efficient for repetitive queries
+- **Batch API**: Cost-effective bulk processing
+
+For detailed Gemini 3.0 documentation, visit: https://ai.google.dev/gemini-api/docs/models/gemini
