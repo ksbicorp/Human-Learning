@@ -5,7 +5,13 @@
 ![React](https://img.shields.io/badge/React-18.3.1-61dafb)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.8.3-3178c6)
 
-![Human Learning Application](https://github.com/user-attachments/assets/b652cf6c-c464-4c27-a26e-a0beeacb6872)
+## 📸 Application Preview
+
+### Hero Section
+![Human Learning Hero](https://github.com/user-attachments/assets/aa8dc50f-af15-4155-9482-d6153085007a)
+
+### Full Application
+![Human Learning Full App](https://github.com/user-attachments/assets/7e7dd37c-fd3b-4a99-8374-499c4d9a8029)
 
 ## 🧠 Overview
 
@@ -96,15 +102,14 @@ export const generativeModel = genAI.getGenerativeModel({
 ```javascript
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const ai = new GoogleGenerativeAI({ apiKey: process.env.GEMINI_API_KEY });
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const model = genAI.getGenerativeModel({ model: "gemini-3-pro-preview" });
 
-async function analyzeChat() {
-  const response = await ai.models.generateContent({
-    model: "gemini-3-pro-preview",
-    contents: "Analyze this chat conversation and identify learning patterns...",
-  });
-
-  console.log(response.text);
+async function analyzeChat(chatContent) {
+  const result = await model.generateContent(chatContent);
+  const response = await result.response;
+  const text = response.text();
+  console.log(text);
 }
 ```
 
