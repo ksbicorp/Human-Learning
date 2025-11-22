@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Brain, Upload, BarChart3, Sparkles, Copy, Check, ArrowRight } from "lucide-react";
+import { Brain, Upload, BarChart3, Sparkles, Copy, Check, ArrowRight, Zap, Shield, Code } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -30,7 +30,7 @@ const Index = () => {
     {
       icon: Brain,
       title: "AI Analysis",
-      description: "Powered by Gemini 2.5 Flash for deep pattern recognition",
+      description: "Powered by Gemini 3.0 Pro for advanced reasoning and deep pattern recognition",
     },
     {
       icon: BarChart3,
@@ -41,6 +41,24 @@ const Index = () => {
       icon: Sparkles,
       title: "Personalized Prompts",
       description: "Get custom AI prompts optimized for how you learn best",
+    },
+  ];
+
+  const geminiFeatures = [
+    {
+      icon: Zap,
+      title: "Advanced Reasoning",
+      description: "State-of-the-art thinking with Gemini 3.0 Pro's dynamic reasoning capabilities",
+    },
+    {
+      icon: Shield,
+      title: "1M Token Context",
+      description: "Massive context window for comprehensive conversation analysis",
+    },
+    {
+      icon: Code,
+      title: "Structured Output",
+      description: "Reliable JSON responses for consistent learning profile generation",
     },
   ];
 
@@ -114,7 +132,7 @@ const Index = () => {
           <div className="inline-flex items-center gap-2 px-5 py-2 rounded-sm bg-card border border-border mb-8 animate-fade-in-down opacity-0">
             <Sparkles className="w-4 h-4" />
             <span className="text-sm font-semibold tracking-wide">
-              AI-POWERED LEARNING ANALYSIS
+              POWERED BY GEMINI 3.0 PRO
             </span>
           </div>
           
@@ -127,7 +145,7 @@ const Index = () => {
           </h1>
           
           <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed animate-fade-in-up opacity-0 animation-delay-200">
-            Analyze your AI conversations to understand your unique learning patterns and communication style.
+            Analyze your AI conversations with advanced reasoning capabilities to understand your unique learning patterns and communication style. Powered by Google's most intelligent AI model.
           </p>
         </div>
 
@@ -313,6 +331,33 @@ const Index = () => {
               })}
             </div>
 
+            {/* Gemini 3.0 Features Section */}
+            <div className="max-w-5xl mx-auto mb-20">
+              <h2 className="text-4xl font-bold text-center mb-4 tracking-tighter animate-fade-in-up opacity-0">GEMINI 3.0 PRO POWERED</h2>
+              <p className="text-center text-muted-foreground mb-12 text-lg max-w-2xl mx-auto">
+                Experience the most advanced AI reasoning capabilities for unprecedented learning analysis
+              </p>
+              <div className="grid md:grid-cols-3 gap-6">
+                {geminiFeatures.map((feature, index) => {
+                  const Icon = feature.icon;
+                  return (
+                    <Card
+                      key={index}
+                      className="glass-card border border-border hover:border-primary transition-smooth group"
+                    >
+                      <CardHeader>
+                        <div className="w-12 h-12 rounded-sm bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-primary-foreground transition-smooth border border-primary/20">
+                          <Icon className="w-6 h-6 text-primary group-hover:text-primary-foreground transition-smooth" />
+                        </div>
+                        <CardTitle className="text-lg mb-2 font-bold tracking-tight">{feature.title}</CardTitle>
+                        <CardDescription className="text-sm">{feature.description}</CardDescription>
+                      </CardHeader>
+                    </Card>
+                  );
+                })}
+              </div>
+            </div>
+
             {/* How It Works */}
             <div className="max-w-5xl mx-auto">
               <h2 className="text-4xl font-bold text-center mb-16 tracking-tighter animate-fade-in-up opacity-0">HOW IT WORKS</h2>
@@ -326,7 +371,7 @@ const Index = () => {
                   {
                     step: "2",
                     title: "AI Analysis",
-                    description: "Our AI analyzes your communication patterns and learning style",
+                    description: "Gemini 3.0 Pro analyzes your communication patterns with advanced reasoning",
                   },
                   {
                     step: "3",
@@ -350,6 +395,45 @@ const Index = () => {
           </>
         )}
       </div>
+
+      {/* Footer */}
+      <footer className="border-t border-border mt-24 py-12">
+        <div className="container mx-auto px-6">
+          <div className="max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-8 mb-8">
+              <div>
+                <h3 className="font-bold text-lg mb-3 flex items-center gap-2">
+                  <Brain className="w-5 h-5" />
+                  Human Learning
+                </h3>
+                <p className="text-muted-foreground text-sm">
+                  AI-powered learning profile analysis using Google's Gemini 3.0 Pro
+                </p>
+              </div>
+              <div>
+                <h4 className="font-semibold mb-3">Technology</h4>
+                <ul className="space-y-2 text-sm text-muted-foreground">
+                  <li>• Gemini 3.0 Pro Preview</li>
+                  <li>• React & TypeScript</li>
+                  <li>• Tailwind CSS</li>
+                  <li>• Vite Build Tool</li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-semibold mb-3">Resources</h4>
+                <ul className="space-y-2 text-sm text-muted-foreground">
+                  <li>• <a href="https://ai.google.dev/gemini-api/docs" className="hover:text-primary transition-colors">Gemini API Docs</a></li>
+                  <li>• <a href="https://github.com/ksbicorp/Human-Learning" className="hover:text-primary transition-colors">GitHub Repository</a></li>
+                  <li>• <a href="https://ai.google.dev/" className="hover:text-primary transition-colors">Get API Key</a></li>
+                </ul>
+              </div>
+            </div>
+            <div className="border-t border-border pt-8 text-center text-sm text-muted-foreground">
+              <p>Built with ❤️ using Google Gemini 3.0 Pro • Open Source • MIT License</p>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
