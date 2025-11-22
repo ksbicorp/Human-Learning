@@ -5,6 +5,8 @@
 ![React](https://img.shields.io/badge/React-18.3.1-61dafb)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.8.3-3178c6)
 
+![Human Learning Application](https://github.com/user-attachments/assets/b652cf6c-c464-4c27-a26e-a0beeacb6872)
+
 ## 🧠 Overview
 
 **Human Learning** is an advanced AI-powered application that analyzes your chat conversations to discover your unique learning patterns and communication style. Using Google's cutting-edge **Gemini 3.0 Pro** model with advanced reasoning capabilities, it generates personalized AI prompts optimized for how you learn best.
