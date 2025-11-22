@@ -15,7 +15,7 @@ This is a Human Learning application built with modern web technologies. It's a 
 - **Routing**: React Router DOM
 - **Desktop Support**: Electron 39+
 - **AI Integration**: Google Generative AI
-- **Package Manager**: npm (with bun.lockb also present)
+- **Package Manager**: npm (primary - use `npm install`, `npm run`, etc.)
 
 ## Project Structure
 
@@ -45,7 +45,7 @@ npm install
 ```bash
 npm run dev
 ```
-This starts the Vite development server on `localhost:8080`.
+This starts the Vite development server on `localhost:8080` (custom port configured in vite.config.ts).
 
 ### Building the Application
 ```bash
@@ -76,11 +76,12 @@ npm run preview
 
 ### TypeScript Configuration
 - **Path alias**: `@/` maps to `./src/`
-- Relaxed TypeScript settings:
+- Relaxed TypeScript settings (configured in tsconfig.app.json):
+  - `strict: false` (disables all strict type-checking options)
   - `noImplicitAny: false`
-  - `strictNullChecks: false`
   - `noUnusedLocals: false`
   - `noUnusedParameters: false`
+  - `noFallthroughCasesInSwitch: false`
 
 ### ESLint Rules
 - React Hooks rules enforced
